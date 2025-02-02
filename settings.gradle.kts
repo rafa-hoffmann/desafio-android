@@ -20,3 +20,11 @@ dependencyResolutionManagement {
 }
 
 include(":app")
+include(":core:domain")
+include(":core:data")
+include(":core:database")
+include(":core:designsystem")
+include(":core:network")
+include(":core:common")
+
+include(":feature:user-list")

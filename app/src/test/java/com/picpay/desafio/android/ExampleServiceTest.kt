@@ -16,8 +16,8 @@ class ExampleServiceTest {
     @Test
     fun exampleTest() {
         // given
-        val call = mock<Call<List<User>>>()
-        val expectedUsers = emptyList<User>()
+        val call = mock<Call<List<com.desafio.picpay.core.user_list.model.User>>>()
+        val expectedUsers = emptyList<com.desafio.picpay.core.user_list.model.User>()
 
         whenever(call.execute()).thenReturn(Response.success(expectedUsers))
         whenever(api.getUsers()).thenReturn(call)

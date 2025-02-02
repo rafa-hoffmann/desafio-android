@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="imagem_de_usuario">Imagem de usuário</string>
+    <string name="contatos">Contatos</string>
+    <string name="falha_ao_atualizar_lista_de_usuarios">Falha ao atualizar lista de usuários</string>
+</resources>
