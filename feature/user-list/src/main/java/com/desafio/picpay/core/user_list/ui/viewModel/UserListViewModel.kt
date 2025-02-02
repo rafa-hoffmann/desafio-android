@@ -25,13 +25,16 @@ class UserListViewModel(
         observeUserList()
     }
 
-    private fun syncUserList() {
+    fun syncUserList() {
         viewModelScope.launch {
+            _uiState.update { it.copy(isRequestingData = true) }
             runCatching {
                 syncUserListUseCase()
-            }.onFailure {
-                _uiState.update { it.copy(isError = true) }
-            }
+            }.fold(onSuccess = {
+                _uiState.update { it.copy(isRequestingData = false) }
+            }, onFailure = {
+                _uiState.update { it.copy(isError = true, isRequestingData = false) }
+            })
         }
     }
 
@@ -60,6 +63,7 @@ class UserListViewModel(
 
 data class UserListUiState(
     val users: List<User> = emptyList(),
+    val isRequestingData: Boolean = false,
     val isLoading: Boolean = false,
     val isError: Boolean = false
 )

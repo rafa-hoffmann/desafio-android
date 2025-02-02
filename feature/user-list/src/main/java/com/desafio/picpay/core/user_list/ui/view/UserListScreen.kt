@@ -5,12 +5,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -40,14 +42,21 @@ fun UserListRoute(viewModel: UserListViewModel = koinViewModel()) {
     }
 
     UserListScreen(
-        users = state.users, isLoading = state.isLoading, snackbarHostState = snackbarHostState
+        users = state.users,
+        isLoading = state.isLoading,
+        snackbarHostState = snackbarHostState,
+        onRefresh = viewModel::syncUserList,
+        isRefreshing = state.isRequestingData
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun UserListScreen(
     users: List<User>,
     isLoading: Boolean,
+    isRefreshing: Boolean,
+    onRefresh: () -> Unit,
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() }
 ) {
     Scaffold(snackbarHost = {
@@ -60,20 +69,22 @@ private fun UserListScreen(
                 style = MaterialTheme.typography.titleLarge
             )
 
-            LazyColumn {
-                if (isLoading) {
-                    item {
-                        LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+            PullToRefreshBox(isRefreshing = isRefreshing, onRefresh = onRefresh) {
+                LazyColumn {
+                    if (isLoading) {
+                        item {
+                            LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                        }
                     }
-                }
 
-                items(users, key = { it.id }) {
-                    UserListItem(
-                        modifier = Modifier.animateItem(),
-                        img = it.img,
-                        username = it.username,
-                        name = it.name
-                    )
+                    items(users, key = { it.id }) {
+                        UserListItem(
+                            modifier = Modifier.animateItem(),
+                            img = it.img,
+                            username = it.username,
+                            name = it.name
+                        )
+                    }
                 }
             }
         }
@@ -92,7 +103,9 @@ private fun UserListScreenPreview() {
                     img = "", name = "Harley Wilkins", id = 7862, username = "Claire Ramirez"
                 ), User(img = "", name = "Ariel Puckett", id = 9640, username = "Ian Sheppard")
             ),
-            isLoading = true
+            isLoading = true,
+            onRefresh = {},
+            isRefreshing = false
         )
     }
 }
