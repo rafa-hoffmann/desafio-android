@@ -10,6 +10,7 @@ activityCompose = "1.10.0"
 composeBom = "2025.01.01"
 appcompat = "1.7.0"
 material = "1.12.0"
+mockk = "1.13.16"
 retrofit = "2.11.0"
 kotlinxCoroutines = "1.10.1"
 kotlinxSerializationJson = "1.8.0"
@@ -44,6 +45,7 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-test = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-ui-testManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-kotlin-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }

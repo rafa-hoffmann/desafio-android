@@ -53,6 +53,11 @@ dependencies {
     implementation(libs.coil.kt.network.okhttp)
 
     testImplementation(libs.robolectric)
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
+
 
     androidTestImplementation(libs.bundles.androidx.compose.ui.test)
     androidTestImplementation(libs.coil.test)
