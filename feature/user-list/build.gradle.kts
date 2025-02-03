@@ -51,4 +51,9 @@ dependencies {
 
     implementation(libs.coil.kt.compose)
     implementation(libs.coil.kt.network.okhttp)
+
+    testImplementation(libs.robolectric)
+
+    androidTestImplementation(libs.bundles.androidx.compose.ui.test)
+    androidTestImplementation(libs.coil.test)
 }

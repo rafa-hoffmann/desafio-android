@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.desafio.picpay.core.designsystem.theme.PicPayTheme
-import com.desafio.picpay.core.user_list.ui.view.UserListRoute
+import com.desafio.picpay.feature.user_list.ui.view.UserListRoute
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
